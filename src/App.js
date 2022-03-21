@@ -1,14 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Layout from "./components/pages";
+import Home from "./components/pages/Home";
+import { Routes, Route, Outlet, Link } from "react-router-dom";
+import NoPageFound from "./components/pages/NoPageFound";
+import Accounts from "./components/pages/Accounts";
+import CreateAccount from "./components/pages/CreateAccount";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        Empty React app!
-      </header>
+    <div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="accounts" element={<Accounts />} />
+          <Route path="create-account" element={<CreateAccount />} />
+          <Route path="*" element={<NoPageFound />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
-
-export default App;
