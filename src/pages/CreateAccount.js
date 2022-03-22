@@ -1,15 +1,9 @@
-import FetchData from './../utility/fetchData';
+import Form from "../components/form";
 
 export default function CreateAccount() {
-  
-  const { data, isLoading, isError } = FetchData('https://vb-react-exam.netlify.app/api/form')
-
-  if (isLoading) return '<Spinner />'
-  if (isError) return '<Error />'
-
   return (
     <div>
-      <h2>{data.data[0].type}</h2>
+      <Form />
     </div>
   );
 }

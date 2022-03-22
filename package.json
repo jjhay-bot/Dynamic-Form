@@ -1,8 +1,8 @@
 {
   "name": "dynamic-form",
   "version": "0.1.0",
-  "homepage": "https://jjhay-bot.github.io/dynamic-form",
   "proxy": "https://vb-react-exam.netlify.app/",
+  "homepage": "https://jjhay-bot.github.io/dynamic-form",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.2",
@@ -12,6 +12,7 @@
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",
     "@mui/styled-engine-sc": "^5.4.2",
+    "@mui/x-data-grid": "^5.6.1",
     "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",

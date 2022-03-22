@@ -1,6 +1,6 @@
 import "./App.css";
 import Layout from "./pages";
-import Home from "./pages/Home";
+// import Home from "./pages/Home2";
 import { Routes, Route } from "react-router-dom";
 import NoPageFound from "./pages/NoPageFound";
 import Accounts from "./pages/Accounts";
@@ -13,7 +13,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<Accounts />} />
           <Route path="accounts" element={<Accounts />} />
           <Route path="create-account" element={<CreateAccount />} />
           <Route path="*" element={<NoPageFound />} />

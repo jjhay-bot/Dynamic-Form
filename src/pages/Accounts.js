@@ -1,26 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
 import { accountsState } from "../store/accounts/accounts-slice";
-import getAccountsData from "./../store/accounts/accounts-actions";
-import useSWR from "swr";
-import axios from "axios";
-import FetchData from "./../utility/fetchData";
 import { useEffect } from "react";
+import getAccountsData from "./../store/accounts/accounts-actions";
+import DataTable from "../components/datatable";
+import { Typography } from "@mui/material";
 
 export default function Accounts() {
   const dispatch = useDispatch();
 
-  const { accountsList, accountsValue, accountsShow } = useSelector(accountsState);
-  
-  const request = FetchData('https://vb-react-exam.netlify.app/api/form')
+  const { accountsList } = useSelector(accountsState);
 
   useEffect(() => {
-    console.log("accountsList", accountsList);
-  }, [accountsList]);
+    dispatch(getAccountsData());
+  }, []);
 
   return (
     <div>
-      <h2>Accounts</h2>
-      <button onClick={() => console.log(request.data)}>Get Accounts</button>
+      <Typography sx={{ textAlign: "center" }} className="color1" variant="title" component="div">
+        <h2>List of Account</h2>
+      </Typography>
+      <DataTable data={accountsList} />
     </div>
   );
 }

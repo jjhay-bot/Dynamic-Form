@@ -8,10 +8,11 @@ const accountsSlice = createSlice({
     accountsShow: false, 
   },
   reducers: {
-    getAccountsList(state, action) {
+    setAccountsList(state, action) {
+      console.log(action.payload);
       state.accountsList = action.payload
     },
-    getAccountsValue(state, action) {
+    setAccountsValue(state, action) {
       state.accountsValue = action.payload
     },
     setAccountsShow(state) {
@@ -21,5 +22,5 @@ const accountsSlice = createSlice({
 });
 
 export default accountsSlice.reducer;
-export const { getAccountsList,getAccountsValue,setAccountsShow } = accountsSlice.actions; 
+export const { setAccountsList,setAccountsValue,setAccountsShow } = accountsSlice.actions; 
 export const accountsState = (state) => state.accounts;

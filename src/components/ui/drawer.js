@@ -7,10 +7,12 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import CompanyName from "./../header/companyName";
+import SupervisorAccountRoundedIcon from "@mui/icons-material/SupervisorAccountRounded";
+import CreateNewFolderRoundedIcon from "@mui/icons-material/CreateNewFolderRounded";
 
 const setPageValue = false;
 
@@ -33,117 +35,38 @@ export default function SwipeableTemporaryDrawer() {
 
   const list = () => (
     <Box
-      sx={{ width: 200, background: "#ffeef8", minHeight: "100vh" }}
+      sx={{ width: 220, background: "#ffeef8", minHeight: "100vh" }}
       role="presentation"
       onClick={toggleDrawer("left", false)}
       onKeyDown={toggleDrawer("left", false)}
     >
       <List>
-        <ListItem ListItem onClick={() => dispatch(setPageValue("home"))}>
+        <ListItem>
           <CompanyName />
         </ListItem>
       </List>
 
       <Divider />
-
       <List>
-        <ListItem onClick={() => dispatch(setPageValue("accessories"))}>
+        <ListItem>
           <ListItemIcon>
-            <img
-              src="https://raw.githubusercontent.com/jjhay-bot/sample-project-ss-/main/dnd/diamond.png"
-              alt="Logo"
-              height="27.5px"
-            />
+            <Link to="/" style={{ zIndex: "10" }}>
+              <SupervisorAccountRoundedIcon />{" "}
+            </Link>
           </ListItemIcon>
-          <ListItemText primary={"Accessories"} />
+          <ListItemText primary={"Accounts"} />
         </ListItem>
 
-        <ListItem onClick={() => dispatch(setPageValue("bracelets"))}>
+        <ListItem>
           <ListItemIcon>
-            <img
-              src="https://raw.githubusercontent.com/jjhay-bot/sample-project-ss-/main/dnd/bracelet%20(2).png"
-              alt="Logo"
-              height="32px"
-            />
+            <Link to="/create-account">
+              <CreateNewFolderRoundedIcon />
+            </Link>
           </ListItemIcon>
-          <ListItemText primary={"Bracelets"} />
-        </ListItem>
-
-        <ListItem onClick={() => dispatch(setPageValue("earrings"))}>
-          <ListItemIcon>
-            <img
-              src="https://raw.githubusercontent.com/jjhay-bot/sample-project-ss-/main/dnd/earrings.png"
-              alt="Logo"
-              height="30px"
-            />
-          </ListItemIcon>
-          <ListItemText primary={"Earrings"} />
-        </ListItem>
-
-        <ListItem onClick={() => dispatch(setPageValue("necklaces"))} href="#root">
-          <ListItemIcon>
-            <img
-              src="https://raw.githubusercontent.com/jjhay-bot/sample-project-ss-/main/dnd/necklace.png"
-              alt="Logo"
-              height="30px"
-            />
-          </ListItemIcon>
-          <ListItemText primary={"Necklaces"} />
-        </ListItem>
-      </List>
-
-      <Divider />
-      <List>
-        <ListItem onClick={() => dispatch(setPageValue("home"))}>
-          <ListItemIcon>
-            <img
-              src="https://raw.githubusercontent.com/jjhay-bot/sample-project-ss-/main/dnd/new.png"
-              alt="Logo"
-              height="30px"
-            />
-          </ListItemIcon>
-          <ListItemText primary={"New Arrivals"} />
-        </ListItem>
-        <ListItem onClick={() => dispatch(setPageValue("home"))}>
-          <ListItemIcon>
-            <img
-              src="https://raw.githubusercontent.com/jjhay-bot/sample-project-ss-/main/dnd/quality.png"
-              alt="Logo"
-              height="30px"
-            />
-          </ListItemIcon>
-          <ListItemText primary={"Best Sellers"} />
-        </ListItem>
-        <ListItem onClick={() => dispatch(setPageValue("home"))}>
-          <ListItemIcon>
-            <img
-              src="https://raw.githubusercontent.com/jjhay-bot/sample-project-ss-/main/dnd/hot-sale.png"
-              alt="Logo"
-              height="30px"
-            />
-          </ListItemIcon>
-          <ListItemText primary={"On Sale"} />
+          <ListItemText primary={"Create Account"} />
         </ListItem>
       </List>
       <Divider />
-
-      <List>
-        <ListItem
-          button
-          onClick={() => {
-            // dispatch(setFormModalShow(true));
-          }}
-        >
-          <ListItemIcon>
-            <img
-              src="https://raw.githubusercontent.com/jjhay-bot/sample-project-ss-/main/dnd/paper-plane.png"
-              alt="Logo"
-              height="26px"
-            />
-          </ListItemIcon>
-          <ListItemText primary={"Message Us"} />
-        </ListItem>
-      </List>
     </Box>
   );
 

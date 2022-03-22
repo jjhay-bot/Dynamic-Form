@@ -1,18 +1,14 @@
-// import axios from "axios";
-// import useSWR from 'swr';
+export const getRequestOptions = async (url) => {
+  const response = await fetch(url);
 
+  if (!response.ok) {
+    if (response.status === 500) {
+      const responseResult = "status 500, Server Error";
+      throw responseResult;
+    }
+    throw new Error("Fetching data failed.");
+  }
 
-// const getRequestOptions = (requestUrl) => {
-//   const fetcher = (url) => axios.get(url).then((res) => res.data);
-
-//   const { data, error } = useSWR(requestUrl, fetcher);
-
-//   return {
-//     data: data,
-//     isLoading: !error && !data,
-//     isError: error,
-//   };
-// };
-
-
-// export default getRequestOptions;
+  const data = await response.json();
+  return data;
+};
