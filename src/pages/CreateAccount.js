@@ -1,4 +1,4 @@
-import FetchData from './../../utility/fetchData';
+import FetchData from './../utility/fetchData';
 
 export default function CreateAccount() {
   

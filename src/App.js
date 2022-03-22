@@ -1,14 +1,16 @@
 import "./App.css";
-import Layout from "./components/pages";
-import Home from "./components/pages/Home";
-import { Routes, Route, Outlet, Link } from "react-router-dom";
-import NoPageFound from "./components/pages/NoPageFound";
-import Accounts from "./components/pages/Accounts";
-import CreateAccount from "./components/pages/CreateAccount";
+import Layout from "./pages";
+import Home from "./pages/Home";
+import { Routes, Route } from "react-router-dom";
+import NoPageFound from "./pages/NoPageFound";
+import Accounts from "./pages/Accounts";
+import CreateAccount from "./pages/CreateAccount";
+import Header from "./components/header/index";
 
 export default function App() {
   return (
     <div>
+      <Header />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

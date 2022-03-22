@@ -2,10 +2,13 @@
   "name": "dynamic-form",
   "version": "0.1.0",
   "homepage": "https://jjhay-bot.github.io/dynamic-form",
+  "proxy": "https://vb-react-exam.netlify.app/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.0",
+    "@fortawesome/react-fontawesome": "^0.1.18",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",
     "@mui/styled-engine-sc": "^5.4.2",
