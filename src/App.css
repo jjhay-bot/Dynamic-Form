@@ -13,10 +13,13 @@ a {
 }
 
 .color1 {
-  /* color: #551a8b !important; */
-  color: #6a3787;
+  color: #551a8b !important;
 }
+
 .textarea {
-  outline: 1px solid;
-  outline-color: #d1c4e9;
+  outline: auto #d1c4e9;
+}
+
+.textarea:hover {
+  outline: auto black;
 }

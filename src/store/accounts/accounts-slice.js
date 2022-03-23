@@ -9,7 +9,6 @@ const accountsSlice = createSlice({
   },
   reducers: {
     setAccountsList(state, action) {
-      console.log(action.payload);
       state.accountsList = action.payload
     },
     setAccountsValue(state, action) {

@@ -5,8 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import SwipeableTemporaryDrawer from "./../ui/drawer";
 import CompanyName from "./companyName";
 import { Grid } from "@mui/material";
-import Pages from "./../../pages/index";
-import Navbar from './Navbar'
+import Navbar from "./Navbar";
 
 export default function Header() {
   const [icon, setIcon] = useState(true && window.innerWidth > 1200);
@@ -31,7 +30,15 @@ export default function Header() {
             <Grid item>
               <CompanyName />
             </Grid>
-            <Grid item>{icon ? <Navbar /> : <SwipeableTemporaryDrawer />}</Grid>
+            <Grid item>
+              {icon ? (
+                <Navbar />
+              ) : (
+                <div>
+                  <SwipeableTemporaryDrawer />
+                </div>
+              )}
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>

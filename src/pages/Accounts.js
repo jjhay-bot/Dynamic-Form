@@ -12,7 +12,7 @@ export default function Accounts() {
 
   useEffect(() => {
     dispatch(getAccountsData());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

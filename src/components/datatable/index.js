@@ -20,7 +20,6 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -224,12 +223,12 @@ export default function DataTable({ data }) {
                       <TableCell align="left">
                         {row.options && (
                           <Box sx={{ minWidth: 120 }}>
-                            <FormControl fullWidth>
+                            <FormControl sx={{ width: "200px" }}>
                               <InputLabel id="demo-simple-select-label">Options</InputLabel>
                               <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={row.options[0]}
+                                defaultValue={row.options[0]}
                                 label="Options"
                                 onChange={() => console.log(row.options)}
                               >

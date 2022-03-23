@@ -8,7 +8,6 @@ const getAccountsData = () => {
       const url = addNewAccountUrl;
       const data = await getRequestOptions(url);
       const result = data.data;
-      console.log(result);
       dispatch(setAccountsList(result));     
       return;
     } catch (error) {

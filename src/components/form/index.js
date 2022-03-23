@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { styled, TextField, Box, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import SubmitButton from "./submitButton";
 import { Grid } from "@mui/material/";
+import getAccountsData from "./../../store/accounts/accounts-actions";
+import { accountsState } from "./../../store/accounts/accounts-slice";
 
 const ValidationTextField = styled(TextField)({
   "& input:valid + fieldset": {
@@ -33,6 +35,12 @@ const Form = () => {
   const submitHandler = async (firstname, lastname, email, gender, age, testimonial) => {
     // dispatch(await LoginRequest(enterUserName, enterPassword));
   };
+
+  const { accountsList } = useSelector(accountsState);
+  console.log("accountsList", accountsList);
+  useEffect(() => {
+    dispatch(getAccountsData());
+  }, []);
 
   return (
     <Grid container justifyContent="center" alignItems="center" direction="column">
@@ -93,7 +101,7 @@ const Form = () => {
           />
 
           <ValidationTextField
-            required
+            // required
             autoComplete="true"
             variant="outlined"
             defaultValue={enteredGender}
@@ -105,7 +113,7 @@ const Form = () => {
           />
 
           <ValidationTextField
-            required
+            // required
             autoComplete="true"
             variant="outlined"
             defaultValue={enteredAge}
@@ -122,13 +130,12 @@ const Form = () => {
             variant="outlined"
             defaultValue={enteredTestimonial}
             id="validation-outlined-input"
-            label="Testimonial"
+            label="Testimonial(optional)"
             type="text"
             multiline
             rows={4}
             onBlur={(e) => setEenteredTestimonial(e.target.value)}
-            style={{ width: "90%", maxWidth: "800px" }}
-            className="textarea"
+            style={{ width: "90%", maxWidth: "800px", outline: 'auto #d1c4e9' }}
           />
 
           <SubmitButton
