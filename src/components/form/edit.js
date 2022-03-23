@@ -1,12 +1,31 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { styled, TextField, Box, Typography, FormControl, MenuItem, Select, InputLabel } from "@mui/material";
+import {
+  styled,
+  TextField,
+  Box,
+  Typography,
+  FormControl,
+  MenuItem,
+  Select,
+  InputLabel,
+  TextareaAutosize,
+} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import SubmitButton from "./submitButton";
 import { Grid } from "@mui/material/";
-import getAccountsData from "../../store/accounts/accounts-actions";
-import { accountsState } from "../../store/accounts/accounts-slice";
+
 import _ from "lodash";
+import {
+  formInputState,
+  setEnteredFirst,
+  setEnteredLast,
+  setEnteredEmail,
+  setEnteredGender,
+  setEnteredAge,
+  setEnteredTestimonial,
+  setEnteredOthers,
+} from "../../store/formInput/formInput-slice";
+import { postUpdatedAccountData } from "../../store/formInput/formInput-actions";
 
 const ValidationTextField = styled(TextField)({
   "& input:valid + fieldset": {
@@ -25,48 +44,34 @@ const ValidationTextField = styled(TextField)({
   },
 });
 
-const UpdateAccount = ({accountsList}) => {
-  const [enteredFirst, setEnteredFirst] = useState("");
-  const [enteredLast, setEnteredLast] = useState("");
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [enteredGender, setEenteredGender] = useState("");
-  const [enteredAge, setEenteredAge] = useState("");
-  const [enteredOthers, setEnteredOthers] = useState("");
-  const [enteredTestimonial, setEenteredTestimonial] = useState("");
-
+const UpdateAccount = () => {
   const dispatch = useDispatch();
+  const { enteredFirst, enteredLast, enteredEmail, enteredGender } = useSelector(formInputState);
+  const { enteredAge, enteredTestimonial, enteredOthers, saveResponse } = useSelector(formInputState);
 
   const setEnteredValue = (e) => {
     e.target.id === "firstName"
-      ? setEnteredFirst(e.target.value)
+      ? dispatch(setEnteredFirst(e.target.value))
       : e.target.id === "lastName"
-      ? setEnteredLast(e.target.value)
+      ? dispatch(setEnteredLast(e.target.value))
       : e.target.id === "emailAddress"
-      ? setEnteredEmail(e.target.value)
+      ? dispatch(setEnteredEmail(e.target.value))
       : e.target.id === "age"
-      ? setEenteredAge(e.target.value)
+      ? dispatch(setEnteredAge(e.target.value))
       : e.target.id === "testimonial"
-      ? setEenteredTestimonial(e.target.value)
-      : setEnteredOthers(e.target.value);
-
-    return;
-  };
-  console.log(enteredFirst, enteredLast, enteredEmail, enteredGender, enteredAge, enteredTestimonial, enteredOthers);
-
-  const submitHandler = async (firstname, lastname, email, gender, age, testimonial, others) => {
-    // dispatch(await LoginRequest(enterUserName, enterPassword));
-    console.log(enteredFirst, enteredLast, enteredEmail, enteredGender, enteredAge, enteredTestimonial, enteredOthers);
+      ? dispatch(setEnteredTestimonial(e.target.value))
+      : dispatch(setEnteredOthers(e.target.value));
   };
 
-  // const { accountsList } = useSelector(accountsState);
-  // console.log("accountsList", accountsList);
-
-  // useEffect(() => {
-  //   dispatch(getAccountsData());
-  // }, []);
-
-  console.log(enteredFirst, enteredLast, enteredEmail, enteredGender, enteredAge, enteredTestimonial, enteredOthers);
-
+  const accountsList = [
+    enteredFirst,
+    enteredLast,
+    enteredEmail,
+    enteredGender,
+    enteredAge,
+    enteredTestimonial,
+    enteredOthers,
+  ].filter((data) => data !== undefined);
   const showGender = accountsList.find((x) => x.fieldName === "gender");
 
   return (
@@ -89,24 +94,25 @@ const UpdateAccount = ({accountsList}) => {
           }}
         >
           {accountsList
-            .filter((x) => x.fieldName != "gender")
-            .map((x) => x)
-            .map((item) => (
-              <ValidationTextField
-                // required
-                // autoComplete="true"
-                variant="outlined"
-                defaultValue={item.value}
-                id={item.fieldName}
-                label={_.startCase(item.fieldName)}
-                type={item.type}
-                onChange={setEnteredValue}
-                style={{ width: "90%", maxWidth: "800px" }}
-                multiline={item.type === "multiline" ? true : false}
-                className={item.type === "multiline" ? "textarea" : ""}
-                key={item.fieldName}
-              />
-            ))}
+            .filter((x) => x.fieldName !== "gender")
+            .map((item, index) => {
+              return (
+                <ValidationTextField
+                  key={index}
+                  // required
+                  // autoComplete="true"
+                  variant="outlined"
+                  defaultValue={item.value}
+                  id={item.fieldName}
+                  label={_.startCase(item.fieldName)}
+                  type={item.type}
+                  onBlur={setEnteredValue}
+                  style={{ width: "90%", maxWidth: "800px" }}
+                  multiline={item.type === "multiline" ? true : false}
+                  className={item.type === "multiline" ? "textarea" : ""}
+                />
+              );
+            })}
 
           {showGender && (
             <Box sx={{ minWidth: "100%" }} style={{ display: "flex", justifyContent: "center" }}>
@@ -117,7 +123,7 @@ const UpdateAccount = ({accountsList}) => {
                   id="demo-simple-select"
                   defaultValue={showGender.value}
                   label="Options"
-                  onChange={(e) => setEenteredGender(e.target.value)}
+                  onChange={(e) => dispatch(setEnteredGender(e.target.value))}
                   className="textarea"
                 >
                   {showGender.options.map((item) => (
@@ -139,10 +145,24 @@ const UpdateAccount = ({accountsList}) => {
             age={enteredAge}
             testimonial={enteredTestimonial}
             message="Submit"
-            onClickAction={() => submitHandler()}
+            onClickAction={() => dispatch(postUpdatedAccountData(accountsList))}
           />
         </Box>
       </Grid>
+
+      {saveResponse && (
+        <div style={{ width: "90%", maxWidth: "800px", margiBottom: "2rem" }}>
+          <Typography className="color1" variant="body1" component="div">
+            <div style={{ paddingRight: "5px" }}>Response</div>
+          </Typography>
+          <TextareaAutosize
+            aria-label="empty textarea"
+            value={JSON.stringify(saveResponse)}
+            style={{ width: "100%", maxWidth: "800px", padding: "10px", boxSizing: "border-box" }}
+            className="textarea"
+          />
+        </div>
+      )}
     </Grid>
   );
 };

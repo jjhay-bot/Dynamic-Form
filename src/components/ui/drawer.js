@@ -49,7 +49,7 @@ export default function SwipeableTemporaryDrawer() {
             <ListItemIcon>
               <SupervisorAccountRoundedIcon className="color1" />
             </ListItemIcon>
-            <ListItemText primary={"Accounts"} className="color1" />
+            <ListItemText primary={"Account Info"} className="color1" />
           </ListItem>
         </Link>
 

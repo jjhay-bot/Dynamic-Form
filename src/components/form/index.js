@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { styled, TextField, Box, Typography } from "@mui/material";
+import { InputLabel, Select, MenuItem, TextareaAutosize } from "@mui/material";
+import { styled, TextField, Box, Typography, FormControl } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import SubmitButton from "./submitButton";
 import { Grid } from "@mui/material/";
-import getAccountsData from "./../../store/accounts/accounts-actions";
-import { accountsState } from "./../../store/accounts/accounts-slice";
-
+import { postNewAccountData } from "./../../store/createAccount/createAccount-actions";
+import { createAccountState } from "./../../store/createAccount/createAccount-slice";
 const ValidationTextField = styled(TextField)({
   "& input:valid + fieldset": {
     borderColor: "#d1c4e9",
@@ -26,21 +26,14 @@ const Form = () => {
   const [enteredFirst, setEnteredFirst] = useState("");
   const [enteredLast, setEnteredLast] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
-  const [enteredGender, setEenteredGender] = useState("");
-  const [enteredAge, setEenteredAge] = useState("");
-  const [enteredTestimonial, setEenteredTestimonial] = useState("");
+  const [enteredGender, setEnteredGender] = useState("male");
+  const [enteredAge, setEnteredAge] = useState("");
+  const [enteredTestimonial, setEnteredTestimonial] = useState("");
 
   const dispatch = useDispatch();
+  const { saveResponse } = useSelector(createAccountState);
 
-  const submitHandler = async (firstname, lastname, email, gender, age, testimonial) => {
-    // dispatch(await LoginRequest(enterUserName, enterPassword));
-  };
-
-  const { accountsList } = useSelector(accountsState);
-  console.log("accountsList", accountsList);
-  useEffect(() => {
-    dispatch(getAccountsData());
-  }, [dispatch]);
+  console.log(saveResponse);
 
   return (
     <Grid container justifyContent="center" alignItems="center" direction="column">
@@ -100,17 +93,25 @@ const Form = () => {
             style={{ width: "90%", maxWidth: "800px" }}
           />
 
-          <ValidationTextField
-            // required
-            autoComplete="true"
-            variant="outlined"
-            defaultValue={enteredGender}
-            id="validation-outlined-input"
-            label="Gender"
-            type="text"
-            onBlur={(e) => setEenteredGender(e.target.value)}
-            style={{ width: "90%", maxWidth: "800px" }}
-          />
+          <Box sx={{ minWidth: "100%" }} style={{ display: "flex", justifyContent: "center" }}>
+            <FormControl style={{ width: "90%", maxWidth: "800px" }}>
+              <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={enteredGender}
+                label="Options"
+                onChange={(e) => setEnteredGender(e.target.value)}
+                className="textarea"
+              >
+                {["male", "female", "others"].map((item) => (
+                  <MenuItem value={item} key={item} style={{ textAlign: "left" }}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
 
           <ValidationTextField
             // required
@@ -120,7 +121,7 @@ const Form = () => {
             id="validation-outlined-input"
             label="Age"
             type="number"
-            onBlur={(e) => setEenteredAge(e.target.value)}
+            onBlur={(e) => setEnteredAge(e.target.value)}
             style={{ width: "90%", maxWidth: "800px" }}
           />
 
@@ -134,8 +135,8 @@ const Form = () => {
             type="text"
             multiline
             rows={4}
-            onBlur={(e) => setEenteredTestimonial(e.target.value)}
-            style={{ width: "90%", maxWidth: "800px", outline: 'auto #d1c4e9' }}
+            onBlur={(e) => setEnteredTestimonial(e.target.value)}
+            style={{ width: "90%", maxWidth: "800px", outline: "auto #d1c4e9" }}
           />
 
           <SubmitButton
@@ -147,8 +148,33 @@ const Form = () => {
             age={enteredAge}
             testimonial={enteredTestimonial}
             message="Submit"
-            onClickAction={() => submitHandler()}
+            onClickAction={() =>
+              dispatch(
+                postNewAccountData(
+                  enteredFirst,
+                  enteredLast,
+                  enteredEmail,
+                  enteredGender,
+                  enteredAge,
+                  enteredTestimonial
+                )
+              )
+            }
           />
+
+          {saveResponse && (
+            <div style={{ width: "90%", maxWidth: "800px", margiBottom: "2rem" }}>
+              <Typography className="color1" variant="body1" component="div">
+                <div style={{ paddingRight: "5px" }}>Response</div>
+              </Typography>
+              <TextareaAutosize
+                aria-label="empty textarea"
+                value={JSON.stringify(saveResponse)}
+                className="textarea"
+                style={{ width: "100%", maxWidth: "800px", padding: "10px", boxSizing: "border-box" }}
+              />
+            </div>
+          )}
         </Box>
       </Grid>
     </Grid>

@@ -14,7 +14,7 @@ export default function Navbar() {
             size="large"
             startIcon={<SupervisorAccountRoundedIcon style={{ paddingBottom: "2.5px" }} className="color1" />}
           >
-            <Link to="/accounts">List of Accounts</Link>
+            <Link to="/accounts">Account Information</Link>
           </Button>
         </Grid>
 

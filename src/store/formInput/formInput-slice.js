@@ -1,25 +1,101 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 const formInputSlice = createSlice({
   name: "formInput",
   initialState: {
-    formInputList: [],
-    formInputValue: "",
-    formInputShow: false, 
+    enteredFirst: "",
+    enteredLast: "",
+    enteredEmail: "",
+    enteredGender: "",
+    enteredAge: "",
+    enteredTestimonial: "",
+    enteredOthers: "",
+    saveResponse: "",
   },
+
   reducers: {
-    getFormInputList(state, action) {
-      state.formInputList = action.payload
+    setEnteredFirst(state, action) {
+      const setNewValue = (state, action) => {
+        let current = state.enteredFirst;
+        current.value = action.payload;
+        return current;
+      };
+      state.enteredFirst = setNewValue(state, action);
     },
-    getFormInputValue(state, action) {
-      state.formInputValue = action.payload
+    setEnteredLast(state, action) {
+      const setNewValue = (state, action) => {
+        let current = state.enteredLast;
+        current.value = action.payload;
+        return current;
+      };
+      state.enteredLast = setNewValue(state, action);
     },
-    setFormInputShow(state) {
-      state.formInputShow = !state.formInputShow
-    },    
+    setEnteredEmail(state, action) {
+      const setNewValue = (state, action) => {
+        let current = state.enteredEmail;
+        current.value = action.payload;
+        return current;
+      };
+      state.enteredEmail = setNewValue(state, action);
+    },
+    setEnteredGender(state, action) {
+      const setNewValue = (state, action) => {
+        let current = state.enteredGender;
+        current.value = action.payload;
+        return current;
+      };
+      state.enteredGender = setNewValue(state, action);
+    },
+    setEnteredAge(state, action) {
+      const setNewValue = (state, action) => {
+        let current = state.enteredAge;
+        current.value = action.payload;
+        return current;
+      };
+      state.enteredAge = setNewValue(state, action);
+    },
+    setEnteredTestimonial(state, action) {
+      const setNewValue = (state, action) => {
+        let current = state.enteredTestimonial;
+        current.value = action.payload;
+        return current;
+      };
+      state.enteredTestimonial = setNewValue(state, action);
+    },
+    setEnteredOthers(state, action) {
+      const setNewValue = (state, action) => {
+        let current = state.enteredOthers;
+        current.value = action.payload;
+        return current;
+      };
+      state.enteredOthers = setNewValue(state, action);
+    },
+    setDefault(state, action) {
+      const others = action.payload.find(
+        (x) =>
+          x.fieldName !== "firstName" &&
+          x.fieldName !== "lastName" &&
+          x.fieldName !== "emailAddress" &&
+          x.fieldName !== "gender" &&
+          x.fieldName !== "age"
+      );
+      state.enteredFirst = Object.values(action.payload).find((x) => x.fieldName === "firstName");
+      state.enteredLast = Object.values(action.payload).find((x) => x.fieldName === "lastName");
+      state.enteredEmail = Object.values(action.payload).find((x) => x.fieldName === "emailAddress");
+      state.enteredGender = Object.values(action.payload).find((x) => x.fieldName === "gender");
+      state.enteredAge = Object.values(action.payload).find((x) => x.fieldName === "age");
+      state.enteredTestimonial = Object.values(action.payload).find((x) => x.fieldName === x.testimonial);
+      state.enteredOthers = others;
+    },
+    saveResponseData(state, action) {
+      console.log('SUCCESS!');
+      state.saveResponse = action.payload;
+    },
   },
 });
 
 export default formInputSlice.reducer;
-export const { getFormInputList,getFormInputValue,setFormInputShow } = formInputSlice.actions; 
+export const { setEnteredFirst, setEnteredLast, setEnteredEmail, setEnteredGender } = formInputSlice.actions;
+export const { setEnteredAge, setEnteredTestimonial, setEnteredOthers, setDefault, saveResponseData } =
+  formInputSlice.actions;
 export const formInputState = (state) => state.formInput;
