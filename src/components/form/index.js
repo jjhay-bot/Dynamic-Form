@@ -40,13 +40,13 @@ const Form = () => {
   console.log("accountsList", accountsList);
   useEffect(() => {
     dispatch(getAccountsData());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Grid container justifyContent="center" alignItems="center" direction="column">
       <Grid item style={{ width: "100%" }}>
         <Typography className="color1" variant="title" component="div">
-          <h2 style={{ textAlign: "center", paddingRight: "5px" }}>New Account</h2>
+          <h2 style={{ textAlign: "center" }}>New Account</h2>
         </Typography>
 
         <Box

@@ -5,7 +5,8 @@ import { Routes, Route } from "react-router-dom";
 import Accounts from "./pages/Accounts";
 import CreateAccount from "./pages/CreateAccount";
 import Header from "./components/header/index";
-import UpdateAccount from "./components/form/update";
+import EditAccount from './pages/EditAccount';
+
 
 export default function App() {
   return (
@@ -16,7 +17,7 @@ export default function App() {
           <Route index element={<Accounts />} />
           <Route path="accounts" element={<Accounts />} />
           <Route path="create-account" element={<CreateAccount />} />
-          <Route path="update-account" element={<UpdateAccount />} />
+          <Route path="update-account" element={<EditAccount />} />
           <Route path="*" element={<Accounts />} />
         </Route>
       </Routes>

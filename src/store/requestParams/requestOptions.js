@@ -1,6 +1,7 @@
-export const getRequestOptions = async (url) => {
-  const response = await fetch(url);
+import { setLoadingShow } from "../ui/loading-slice";
 
+export const getRequestOptions = async (url) => {
+  const response = await fetch(url)
   if (!response.ok) {
     if (response.status === 500) {
       const responseResult = "status 500, Server Error";

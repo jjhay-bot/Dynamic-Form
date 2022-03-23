@@ -1,23 +1,17 @@
 import * as React from "react";
-import { Box, Stack, IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { useDispatch } from "react-redux";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faBars } from "@fortawesome/free-solid-svg-icons";
 import CompanyName from "./../header/companyName";
 import SupervisorAccountRoundedIcon from "@mui/icons-material/SupervisorAccountRounded";
 import CreateNewFolderRoundedIcon from "@mui/icons-material/CreateNewFolderRounded";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { Link } from "react-router-dom";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
-
-const setPageValue = false;
 
 export default function SwipeableTemporaryDrawer() {
   const [state, setState] = React.useState({
@@ -26,10 +20,7 @@ export default function SwipeableTemporaryDrawer() {
     bottom: false,
     right: false,
   });
-  const dispatch = useDispatch();
-  // const { formModalShow } = useSelector(formModalState);
-  // const history = useHistory();
-  // const handleClick = () => history.push('/goodbye');
+
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event && event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -84,24 +75,8 @@ export default function SwipeableTemporaryDrawer() {
     </Box>
   );
 
-  // const list = (anchor) => (
-  //   <Box
-  //     sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-  //     role="presentation"
-  //     onClick={toggleDrawer(anchor, false)}
-  //     onKeyDown={toggleDrawer(anchor, false)}
-  //   >
-  //     <List>
-  //       {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-
-  //         </ListItem>
-  //       ))}
-  //     </List>
-  //   </Box>
-  // );
-
   return (
-    <React.Fragment key={"left"}>
+    <React.Fragment >
       <IconButton size="large" onClick={toggleDrawer("left", true)} style={{ marginRight: "10px" }}>
         <MenuRoundedIcon />
       </IconButton>

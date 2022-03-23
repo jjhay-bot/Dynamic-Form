@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { styled, TextField, Box, Typography, FormControl, MenuItem, Select, InputLabel } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import SubmitButton from "./submitButton";
 import { Grid } from "@mui/material/";
-import getAccountsData from "./../../store/accounts/accounts-actions";
+import getAccountsData from "../../store/accounts/accounts-actions";
 import { accountsState } from "../../store/accounts/accounts-slice";
 import _ from "lodash";
 
@@ -25,7 +25,7 @@ const ValidationTextField = styled(TextField)({
   },
 });
 
-const UpdateAccount = () => {
+const UpdateAccount = ({accountsList}) => {
   const [enteredFirst, setEnteredFirst] = useState("");
   const [enteredLast, setEnteredLast] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -58,12 +58,12 @@ const UpdateAccount = () => {
     console.log(enteredFirst, enteredLast, enteredEmail, enteredGender, enteredAge, enteredTestimonial, enteredOthers);
   };
 
-  const { accountsList } = useSelector(accountsState);
-  console.log("accountsList", accountsList);
+  // const { accountsList } = useSelector(accountsState);
+  // console.log("accountsList", accountsList);
 
-  useEffect(() => {
-    dispatch(getAccountsData());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAccountsData());
+  // }, []);
 
   console.log(enteredFirst, enteredLast, enteredEmail, enteredGender, enteredAge, enteredTestimonial, enteredOthers);
 
@@ -118,7 +118,7 @@ const UpdateAccount = () => {
                   defaultValue={showGender.value}
                   label="Options"
                   onChange={(e) => setEenteredGender(e.target.value)}
-                  className='textarea'
+                  className="textarea"
                 >
                   {showGender.options.map((item) => (
                     <MenuItem value={item} key={item} style={{ textAlign: "left" }}>
