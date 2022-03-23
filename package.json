@@ -1,7 +1,7 @@
 {
   "name": "dynamic-form",
   "version": "0.1.0",
-  "homepage": "https://dynamic-form-vb.io",
+  "homepage": "https://jjhay-bot.github.io/dynamic-form/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.2",
