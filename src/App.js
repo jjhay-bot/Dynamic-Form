@@ -6,11 +6,13 @@ import Accounts from "./pages/Accounts";
 import CreateAccount from "./pages/CreateAccount";
 import Header from "./components/header/index";
 import EditAccount from './pages/EditAccount';
+import SnackbarNotif from './components/ui/notification';
 
 
 export default function App() {
   return (
     <div>
+      <SnackbarNotif />
       <Header />
       <Routes>
         <Route path="/" element={<Layout />}>

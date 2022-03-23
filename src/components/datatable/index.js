@@ -84,12 +84,14 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         {headCells.map((headCell, index) => (
+          
           <TableCell
             key={index}
             align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
+            <Tooltip title={`Sort by ${headCell.label}`}>
             <TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : "asc"}
@@ -102,7 +104,9 @@ function EnhancedTableHead(props) {
                 </Box>
               ) : null}
             </TableSortLabel>
+            </Tooltip>
           </TableCell>
+      
         ))}
       </TableRow>
     </TableHead>

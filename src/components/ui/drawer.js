@@ -1,11 +1,7 @@
 import * as React from "react";
 import { Box, IconButton } from "@mui/material";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import { List, Tooltip, Divider, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import CompanyName from "./../header/companyName";
 import SupervisorAccountRoundedIcon from "@mui/icons-material/SupervisorAccountRounded";
 import CreateNewFolderRoundedIcon from "@mui/icons-material/CreateNewFolderRounded";
@@ -20,7 +16,6 @@ export default function SwipeableTemporaryDrawer() {
     bottom: false,
     right: false,
   });
-
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event && event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -76,11 +71,13 @@ export default function SwipeableTemporaryDrawer() {
   );
 
   return (
-    <React.Fragment >
-      <IconButton size="large" onClick={toggleDrawer("left", true)} style={{ marginRight: "10px" }}>
-        <MenuRoundedIcon />
-      </IconButton>
-      
+    <React.Fragment>
+      <Tooltip title="Menu options">
+        <IconButton size="large" onClick={toggleDrawer("left", true)} style={{ marginRight: "10px" }}>
+          <MenuRoundedIcon />
+        </IconButton>
+      </Tooltip>
+
       <SwipeableDrawer
         anchor={"left"}
         open={state["left"]}

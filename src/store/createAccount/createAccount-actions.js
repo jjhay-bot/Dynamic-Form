@@ -2,6 +2,7 @@ import { saveResponseData } from "./createAccount-slice";
 import { editAccountUrl } from "../requestParams/requestUrl";
 import { setLoadingShow } from "../ui/loading-slice";
 import { postNewAccountRequestOptions } from "../requestParams/requestOptions";
+import { hideNotification, showAddRemarkFailed, showIncompleteForm, showSaveSuccess } from "../ui/notification-slice";
 
 export const postNewAccountData = (
   enteredFirst,
@@ -27,9 +28,17 @@ export const postNewAccountData = (
       const result = data;
       dispatch(saveResponseData(result));
       dispatch(setLoadingShow(false));
+      dispatch(showSaveSuccess());
+      setTimeout(() => {
+        dispatch(hideNotification());
+      }, 3000);
       return;
     } catch (error) {
       dispatch(setLoadingShow(false));
+      dispatch(showIncompleteForm());
+      setTimeout(() => {
+        dispatch(hideNotification());
+      }, 3000);
       console.log(error);
     }
   };

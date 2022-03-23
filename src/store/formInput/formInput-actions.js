@@ -1,7 +1,8 @@
 import { addNewAccountUrl, editAccountUrl } from "../requestParams/requestUrl";
 import { getRequestOptions, postRequestOptions } from "../requestParams/requestOptions";
 import { setLoadingShow } from "../ui/loading-slice";
-import { setDefault, saveResponseData } from "./formInput-slice";
+import { setDefault } from "./formInput-slice";
+import { hideNotification, showAddRemarkFailed, showEditIssueSuccess, showIncompleteForm, showSaveSuccess } from "../ui/notification-slice";
 
 const getSaveAccountsData = () => {
   return async (dispatch) => {
@@ -10,12 +11,19 @@ const getSaveAccountsData = () => {
       const url = addNewAccountUrl;
       const data = await getRequestOptions(url);
       const result = data.data;
-
+      dispatch(showSaveSuccess());
+      setTimeout(() => {
+        dispatch(hideNotification());
+      }, 3000);
       dispatch(setDefault(result));
       dispatch(setLoadingShow(false));
       return;
     } catch (error) {
       dispatch(setLoadingShow(false));
+      dispatch(showIncompleteForm());
+      setTimeout(() => {
+        dispatch(hideNotification());
+      }, 3000);
       console.log(error);
     }
   };
@@ -65,13 +73,17 @@ export const postUpdatedAccountData = (accountsList) => {
         testimonial,
         othersKey,
         othersValue
-      ).then(res => res.json())
-      const result = data
-      dispatch(saveResponseData(result));
+      ).then((res) => res.json());
+      const result = data;
+      dispatch(showEditIssueSuccess(result));
       dispatch(setLoadingShow(false));
       return;
     } catch (error) {
       dispatch(setLoadingShow(false));
+      dispatch(showAddRemarkFailed());
+      setTimeout(() => {
+        dispatch(hideNotification());
+      }, 3000);
       console.log(error);
     }
   };
