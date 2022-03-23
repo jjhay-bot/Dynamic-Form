@@ -33,8 +33,6 @@ const Form = () => {
   const dispatch = useDispatch();
   const { saveResponse } = useSelector(createAccountState);
 
-  console.log(saveResponse);
-
   return (
     <Grid container justifyContent="center" alignItems="center" direction="column">
       <Grid item style={{ width: "100%" }}>

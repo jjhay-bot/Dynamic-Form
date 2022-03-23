@@ -13,8 +13,6 @@ export default function Accounts() {
   const { accountsList } = useSelector(accountsState);
   const { loadingShow } = useSelector(loadingState);
 
-  console.log(loadingShow);
-
   useEffect(() => {
     dispatch(getAccountsData());
     return;

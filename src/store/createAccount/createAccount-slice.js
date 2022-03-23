@@ -7,7 +7,6 @@ const createAccountSlice = createSlice({
   },
   reducers: {
     saveResponseData(state, action) {
-      console.log('SUCCESS!');
       state.saveResponse = action.payload;
     },
   },

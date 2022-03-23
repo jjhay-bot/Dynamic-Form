@@ -27,7 +27,6 @@ export const postNewAccountData = (
       const result = data;
       dispatch(saveResponseData(result));
       dispatch(setLoadingShow(false));
-      console.log(result);
       return;
     } catch (error) {
       dispatch(setLoadingShow(false));

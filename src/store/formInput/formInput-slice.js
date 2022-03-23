@@ -88,7 +88,6 @@ const formInputSlice = createSlice({
       state.enteredOthers = others;
     },
     saveResponseData(state, action) {
-      console.log('SUCCESS!');
       state.saveResponse = action.payload;
     },
   },
