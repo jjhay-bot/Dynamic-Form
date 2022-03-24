@@ -13,7 +13,7 @@ export default function SnackbarNotif() {
   const { shownotification, shownotificationMessage } = useSelector(notificationState);
   const conditionSucess = ["Successfully fetch data!", "Updated successfully!", "Successfully save data!"];
   const statusSuccess = conditionSucess.find((item) => item === shownotificationMessage);
-  console.log(shownotification);
+
   return (
     <>
       {shownotification ? (

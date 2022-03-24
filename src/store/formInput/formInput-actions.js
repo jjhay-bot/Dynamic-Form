@@ -1,7 +1,7 @@
 import { addNewAccountUrl, editAccountUrl } from "../requestParams/requestUrl";
 import { getRequestOptions, postRequestOptions } from "../requestParams/requestOptions";
 import { setLoadingShow } from "../ui/loading-slice";
-import { setDefault } from "./formInput-slice";
+import { setDefault, saveResponseData } from "./formInput-slice";
 import { hideNotification, showAddRemarkFailed, showEditIssueSuccess, showIncompleteForm, showSaveSuccess } from "../ui/notification-slice";
 
 const getSaveAccountsData = () => {
@@ -15,6 +15,7 @@ const getSaveAccountsData = () => {
       setTimeout(() => {
         dispatch(hideNotification());
       }, 3000);
+      console.log('result', result);
       dispatch(setDefault(result));
       dispatch(setLoadingShow(false));
       return;
@@ -76,6 +77,8 @@ export const postUpdatedAccountData = (accountsList) => {
       ).then((res) => res.json());
       const result = data;
       dispatch(showEditIssueSuccess(result));
+      console.log(result);
+      dispatch(saveResponseData(result))
       dispatch(setLoadingShow(false));
       return;
     } catch (error) {

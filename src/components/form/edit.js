@@ -49,6 +49,9 @@ const UpdateAccount = () => {
   const { enteredFirst, enteredLast, enteredEmail, enteredGender } = useSelector(formInputState);
   const { enteredAge, enteredTestimonial, enteredOthers, saveResponse } = useSelector(formInputState);
 
+
+  console.log('saveResponse',saveResponse );
+
   const setEnteredValue = (e) => {
     e.target.id === "firstName"
       ? dispatch(setEnteredFirst(e.target.value))
