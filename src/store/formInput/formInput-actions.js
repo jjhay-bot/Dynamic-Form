@@ -15,7 +15,6 @@ const getSaveAccountsData = () => {
       setTimeout(() => {
         dispatch(hideNotification());
       }, 3000);
-      console.log('result', result);
       dispatch(setDefault(result));
       dispatch(setLoadingShow(false));
       return;
@@ -77,7 +76,6 @@ export const postUpdatedAccountData = (accountsList) => {
       ).then((res) => res.json());
       const result = data;
       dispatch(showEditIssueSuccess(result));
-      console.log(result);
       dispatch(saveResponseData(result))
       dispatch(setLoadingShow(false));
       return;
